@@ -26,6 +26,55 @@ python app.py
 3. Enter a task in the input field and click the "Add Task" button.
 4. Tasks will be displayed as a list. To delete a task, click the "Delete" button next to it.
 
+## Topology
+```ASCII
++------------------+      HTTP GET         +-------------------+
+|  Web Browser    | ---------------------> |  Flask Application|
++------------------+                       +-------------------+
+        |                                          |
+        | HTTP GET                                 |
+        | /                                        |
+        |                                          |
+        |     +--------------------------+         |
+        +---> |  index()                 |         |
+        |     |  Render index.html       |         |
+        |     |  Display tasks list      |         |
+        |     +--------------------------+         |
+        |                                          |
+        |                                          |
+        |                                          |
+        |  HTTP POST                               |
+        |  /add                                    |
+        |                                          |
+        |     +--------------------------+         |
+        +---> |  add()                   |         |
+        |     |  Extract task from form  |         |
+        |     |  Append task to tasks    |         |
+        |     |  Redirect to /           |         |
+        |     +--------------------------+         |
+        |                                          |
+        |                                          |
+        |  HTTP POST                               |
+        |  /delete                                 |
+        |                                          |
+        |     +--------------------------+         |
+        +---> |  delete()                |         |
+        |     |  Extract task from form  |         |
+        |     |  Remove task from tasks  |         |
+        |     |  Redirect to /           |         |
+        |     +--------------------------+         |
+        |                                          |
+        |                                          |
+        |                                          |
+        |                                          |
+        |                                          |
+        |      +-----------------------+           |
+        +----> |  index.html           |           |
+               |  Display tasks list   |           |
+               +-----------------------+           |
+
+```
+
 ## Contributing
 Contributions are welcome! If you have any ideas, suggestions, or bug reports, please open an issue or submit a pull request.
 
